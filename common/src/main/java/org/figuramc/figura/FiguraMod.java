@@ -1,5 +1,7 @@
 package org.figuramc.figura;
 
+import com.zeydie.figura.FiguraConfig;
+import com.zeydie.figura.permissions.FiguraModelPermissions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -57,6 +59,14 @@ public class FiguraMod {
         return Configs.DEBUG_MODE != null && Configs.DEBUG_MODE.value;
     }
 
+    //TODO ZeyCodeStart
+    private static final FiguraConfig figuraConfig = new FiguraConfig();
+
+    public static FiguraConfig getFiguraConfig() {
+        return figuraConfig;
+    }
+    //TODO ZeyCodeEnd
+
     public static void onClientInit() {
         // init managers
         EntryPointManager.init();
@@ -65,6 +75,10 @@ public class FiguraMod {
         CacheAvatarLoader.init();
         FiguraDocsManager.init();
         FiguraRuntimeResources.init();
+
+        //TODO ZeyCodeStart
+        FiguraModelPermissions.updateAllowedModels();
+        //TODO ZeyCodeEnd
 
         GeckoLibCompat.init();
         SimpleVCCompat.init();
